@@ -1,0 +1,26 @@
+
+{
+  "bots": [
+
+
+   
+    {
+      "host": "",
+    
+      "version":"1.20.1",
+      "username": "",
+      "reconnectDelay": 6000,
+
+      "commands": {
+        "prefix": ""
+      },
+
+      "discord": {
+        "channelId": "",
+        "invite": "",
+        "commandPrefix": ""
+      }
+    }
+   
+  ]
+}
