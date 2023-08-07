@@ -20,6 +20,11 @@ function createBot(options = {}) {
       bot.emit('packet.' + meta.name, data)
     })
 
+    client.on('login', () => {
+      bot.uuid = client.uuid
+      bot.username = client.username
+    })
+
     client.on('end', reason => bot.emit('end', reason))
 
     client.on('error', error => bot.emit('error', error))

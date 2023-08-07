@@ -9,15 +9,15 @@ function inject (bot) {
     if (!plainMessage.startsWith(bot.commandManager.prefix)) return
     const command = plainMessage.substring(bot.commandManager.prefix.length)
   
-    const source = new CommandSource(data.sender)
+    const source = new CommandSource(data.sender, { discord: false, console: false }, true)
     source.sendFeedback = message => {
       const prefix = {
-        translate: '[%s%s%s%s][%s][%s][%s] ',
-        bold: true,
-        color: '<color here>',
-        with: [
-          { color: '<color here>', text: '<name here>' },
-        
+      translate: '[%s%s%s%s] ', //%s is for each { color: 'color example', text: 'name example'}, 
+      bold: true,
+      color: 'white',
+      with: [
+       { color: 'color name here', text: 'bot name here' },
+          
         ]
       }
       

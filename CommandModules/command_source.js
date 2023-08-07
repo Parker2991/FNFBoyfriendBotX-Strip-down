@@ -1,12 +1,15 @@
 class CommandSource {
-  constructor (player) {
+  constructor (player, sources, hash = false, discordMessageEvent = null) {
     this.player = player
+    this.sources = sources
+    this.hash = hash
+    this.discordMessageEvent = discordMessageEvent
   }
 
   sendFeedback () {}
 
   sendError (message) {
-    this.sendFeedback([{ text: '', color: '<color here>' }, message], false)
+    this.sendFeedback([{ text: '', color: 'dark_red' }, message], false)
   }
 }
 

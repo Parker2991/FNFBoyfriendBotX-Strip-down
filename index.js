@@ -1,9 +1,7 @@
 const createBot = require('./bot.js')
-//const createcorelessbot = require('./creayun foliaboom bot/index.js')
-// TODO: Load a default config
+
 const config = require('./config.json')
 const readline = require('readline')
-
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,

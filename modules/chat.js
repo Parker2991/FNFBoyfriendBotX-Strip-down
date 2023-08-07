@@ -1,5 +1,6 @@
 const loadPrismarineChat = require('prismarine-chat')
 const kaboomChatParser = require('../chat/kaboom')
+const u203aChatParser = require('../chat/u203a')
 
 function tryParse (json) {
   try {
@@ -15,7 +16,7 @@ function inject (bot) {
     ChatMessage = loadPrismarineChat(registry)
   })
 
-  bot.chatParsers = [kaboomChatParser]
+  bot.chatParsers = [kaboomChatParser, u203aChatParser]
 
   bot.on('packet.profileless_chat', packet => {
     const message = tryParse(packet.message)
@@ -29,7 +30,7 @@ function inject (bot) {
 
     bot.emit('message', message)
 
-    tryParsingMessage(message, { senderName: sender, players: bot.players })
+    tryParsingMessage(message, { senderName: sender, players: bot.players, getMessageAsPrismarine: bot.getMessageAsPrismarine })
   })
 
   bot.on('packet.player_chat', packet => {
@@ -39,7 +40,7 @@ function inject (bot) {
 
     bot.emit('message', unsigned)
 
-    tryParsingMessage(unsigned, { senderUuid: packet.senderUuid, players: bot.players })
+    tryParsingMessage(unsigned, { senderUuid: packet.senderUuid, players: bot.players, getMessageAsPrismarine: bot.getMessageAsPrismarine })
   })
 
   bot.on('packet.system_chat', packet => {
@@ -55,7 +56,7 @@ function inject (bot) {
     
     bot.emit('message', message)
 
-    tryParsingMessage(message, { players: bot.players })
+    tryParsingMessage(message, { players: bot.players, getMessageAsPrismarine: bot.getMessageAsPrismarine })
   })
 
   function tryParsingMessage (message, data) {
@@ -70,7 +71,12 @@ function inject (bot) {
   }
 
   bot.getMessageAsPrismarine = message => {
-    if (ChatMessage !== undefined) return new ChatMessage(message)
+    try {
+      if (ChatMessage !== undefined) {
+        return new ChatMessage(message)
+      }
+    } catch {}
+    
     return undefined
   }
 

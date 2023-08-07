@@ -8,9 +8,9 @@ module.exports = {
     const bot = context.bot
 
     const component = {
-      translate: '[%s%s%s%s] [%s] %s \u203a %s',
+      translate: '[%s%s%s%s] [%s] %s \u203a %s', //%s is for each { color: 'color example', text: 'name example'},  also DO NOT REMOVE \u203a
       with: [
-  { color: '<color here>', text: '<name here>',bold: true },//bold is optional
+  { color: 'color here', text: 'bot name here',bold: true },//bold is optional
         
         bot.options.host,
         context.source.player.displayName ?? context.source.player.profile.name,

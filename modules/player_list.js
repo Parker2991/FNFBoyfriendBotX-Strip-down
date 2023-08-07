@@ -19,7 +19,7 @@ function inject (bot) {
   })
 
   bot.on('player_remove', packet => {
-    // TODO: Add player removal (with validation)
+  
   })
 
   function addPlayer (entry) {
@@ -37,7 +37,7 @@ function inject (bot) {
   }
 
   function initializeChat (entry) {
-    // TODO: Handle chat sessions
+   
   }
 
   function updateGamemode (entry) {
@@ -68,7 +68,7 @@ function inject (bot) {
     try {
       target.displayName = JSON.parse(entry.displayName)
     } catch {
-      // do nothing
+      
     }
   }
 

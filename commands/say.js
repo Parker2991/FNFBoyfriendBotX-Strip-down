@@ -7,11 +7,11 @@ module.exports = {
     const message = context.arguments.join(' ')
 
     const prefix = {
-      translate: '[%s%s%s%s][%s][%s][%s] ',
+      translate: '[%s%s%s%s][%s][%s][%s] ',//%s is for each { color: 'color example', text: 'name example'}, 
       bold: true,
       color: 'dark_gray',
       with: [
-       { color: '<color here>', text: '<name here>' }
+       { color: 'color here', text: 'bot name here' }
       ]
     }
 

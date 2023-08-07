@@ -1,5 +1,0 @@
-const CodeBuild = require('./Info/Ultimate Foundation.json)
-const FNFBoyfriendBotVersion = require('./Info/FNFBoyfriendBotVersion.json')
-const Devs = require('./Info/Devs.json')
-const CommandConfig = require('./Info/CommandConfig.json')
-const Status = require('./Info/Status.json')

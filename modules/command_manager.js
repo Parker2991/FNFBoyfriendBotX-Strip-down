@@ -4,7 +4,7 @@ const CommandError = require('../CommandModules/command_error.js')
 
 function inject (bot, options) {
   bot.commandManager = {
-    prefix: options.commands?.prefix ?? 'default.',
+    prefix: options.commands?.prefix ?? 'default',
     commands: {},
 
     execute (source, commandName, args) {
@@ -13,6 +13,25 @@ function inject (bot, options) {
       try {
         if (!command || !command.execute) throw new CommandError({ translate: 'Unknown command: %s', with: [commandName] })
 
+        if (command.consoleOnly && !source.sources.console) throw new CommandError({ translate: 'This command can only be executed via console', color: 'dark_red' })
+        if (command.hashOnly && args.length === 0 && source.hash) throw new CommandError({ translate: 'Please provide a hash', color: 'dark_red' })
+
+        if (command.hashOnly && source.hash) {
+          const hash = args[0]
+
+          if (hash !== bot.hashing.hash) throw new CommandError({ translate: 'Invalid hash', color: 'dark_red' })
+
+          bot.hashing.updateHash()//this section is for validation codes do not use if it is not connected to a discord server 
+        } else if (command.hashOnly && source.sources.discord) {
+          const event = source.discordMessageEvent
+
+          const roles = event.member?.roles?.cache
+
+          const hasRole = roles.some(role => role.name === 'trusted')
+
+          if (!hasRole) throw new CommandError({ translate: 'You are not trusted!' })
+        }
+        
         return command.execute({ bot, source, arguments: args })
       } catch (error) {
         console.error(error)
